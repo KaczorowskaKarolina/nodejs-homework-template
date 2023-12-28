@@ -1,5 +1,3 @@
-// routes/api/contacts.js
-
 const express = require('express');
 const contactsModel = require('../../models/contacts');
 
