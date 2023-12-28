@@ -1,25 +1,71 @@
-const express = require('express')
+// routes/api/contacts.js
 
-const router = express.Router()
+const express = require('express');
+const contactsModel = require('../../models/contacts');
+
+const router = express.Router();
 
 router.get('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+  try {
+    const contacts = await contactsModel.listContacts();
+    res.json(contacts);
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.get('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+  const { contactId } = req.params;
+
+  try {
+    const contact = await contactsModel.getContactById(contactId);
+
+    if (contact) {
+      res.json(contact);
+    } else {
+      res.status(404).json({ message: 'Not found' });
+    }
+  } catch (error) {
+    next(error);
+  }
+});
 
 router.post('/', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+  const { body } = req;
+
+  try {
+    const newContact = await contactsModel.addContact(body);
+    res.status(201).json(newContact);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 
 router.delete('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+  const { contactId } = req.params;
+
+  try {
+    await contactsModel.removeContact(contactId);
+    res.json({ message: 'Contact deleted' });
+  } catch (error) {
+    res.status(404).json({ message: 'Not found' });
+  }
+});
 
 router.put('/:contactId', async (req, res, next) => {
-  res.json({ message: 'template message' })
-})
+  const { contactId } = req.params;
+  const { body } = req;
 
-module.exports = router
+  try {
+    const updatedContact = await contactsModel.updateContact(contactId, body);
+    res.json(updatedContact);
+  } catch (error) {
+    if (error.message === 'Contact not found') {
+      res.status(404).json({ message: 'Not found' });
+    } else {
+      res.status(400).json({ message: error.message });
+    }
+  }
+});
+
+module.exports = router;
