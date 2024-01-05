@@ -1,13 +1,13 @@
 // models/contacts.js
 
-const fs = require('fs/promises');
-const { v4: uuidv4 } = require('uuid');
-const Joi = require('joi');
+import { readFile, writeFile } from 'fs/promises';
+import { v4 as uuidv4 } from 'uuid';
+import Joi from 'joi';
 
 const contactsFilePath = 'models/contacts.json';
 
 const listContacts = async () => {
-  const contactsData = await fs.readFile(contactsFilePath, 'utf-8');
+  const contactsData = await readFile(contactsFilePath, 'utf-8');
   return JSON.parse(contactsData);
 };
 
@@ -19,7 +19,7 @@ const getContactById = async (contactId) => {
 const removeContact = async (contactId) => {
   const contacts = await listContacts();
   const updatedContacts = contacts.filter((contact) => contact.id !== contactId);
-  await fs.writeFile(contactsFilePath, JSON.stringify(updatedContacts, null, 2));
+  await writeFile(contactsFilePath, JSON.stringify(updatedContacts, null, 2));
 };
 
 const addContact = async (body) => {
@@ -41,7 +41,7 @@ const addContact = async (body) => {
   const contacts = await listContacts();
   const newContact = { id: uuidv4(), name, email, phone };
   contacts.push(newContact);
-  await fs.writeFile(contactsFilePath, JSON.stringify(contacts, null, 2));
+  await writeFile(contactsFilePath, JSON.stringify(contacts, null, 2));
   return newContact;
 };
 
@@ -66,7 +66,7 @@ const updateContact = async (contactId, body) => {
     contact.id === contactId ? { ...contact, ...body } : contact
   );
 
-  await fs.writeFile(contactsFilePath, JSON.stringify(updatedContacts, null, 2));
+  await writeFile(contactsFilePath, JSON.stringify(updatedContacts, null, 2));
 
   const updatedContact = updatedContacts.find((contact) => contact.id === contactId);
   if (!updatedContact) {
@@ -76,7 +76,7 @@ const updateContact = async (contactId, body) => {
   return updatedContact;
 };
 
-module.exports = {
+export {
   listContacts,
   getContactById,
   removeContact,

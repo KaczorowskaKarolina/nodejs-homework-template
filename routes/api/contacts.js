@@ -1,5 +1,7 @@
-const express = require('express');
-const contactsModel = require('../../models/contacts');
+// routes/api/contacs.js
+
+import express from 'express';
+import * as contactsModel from '../../models/contacts.js';
 
 const router = express.Router();
 
@@ -66,4 +68,4 @@ router.put('/:contactId', async (req, res, next) => {
   }
 });
 
-module.exports = router;
+export { router };
