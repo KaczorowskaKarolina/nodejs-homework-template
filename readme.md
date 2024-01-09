@@ -12,11 +12,11 @@ Postman was used to work with the REST API.
 
 REST API supports the following routes:
 
-@ GET /api/contacts
-@GET /api/contacts/:id
-@POST /api/contacts
-@DELETE /api/contacts/:id
-@PUT /api/contacts/:id
+- @ GET /api/contacts
+- @GET /api/contacts/:id
+- @POST /api/contacts
+- @DELETE /api/contacts/:id
+- @PUT /api/contacts/:id
 
 For routes that accept data (POST and PUT), checking (validation) of the received data has been considered. The joi package was used for validation.
 
