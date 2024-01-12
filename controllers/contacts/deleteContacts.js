@@ -12,4 +12,4 @@ async function deleteContacts(req, res, next) {
   }
 }
 
-module.exports = deleteContacts;
+module.exports = { deleteContacts };

@@ -17,4 +17,4 @@ async function showContacts(req, res, next) {
   }
 }
 
-module.exports = showContacts;
+module.exports = { showContacts };

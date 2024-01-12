@@ -1,5 +1,5 @@
 // controllers/contacts/indexContacts.js
-const { listContacts } = require('../../models/contacts');
+const { listContacts, addContact } = require('../../models/contacts');
 
 async function indexContacts(req, res, next) {
   try {
@@ -12,4 +12,15 @@ async function indexContacts(req, res, next) {
   }
 }
 
-module.exports = indexContacts;
+async function createContacts(req, res, next) {
+  const { body } = req;
+
+  try {
+    const newContact = await addContact(body);
+    res.status(201).json(newContact);
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+}
+
+module.exports = { indexContacts, createContacts };

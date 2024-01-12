@@ -1,8 +1,8 @@
-// models/contacts.js
+// // models/contacts.js
 
-import { readFile, writeFile } from 'fs/promises';
-import { v4 as uuidv4 } from 'uuid';
-import Joi from 'joi';
+const { readFile, writeFile } = require('fs').promises;
+const { v4: uuidv4 } = require('uuid');
+const Joi = require('joi');
 
 const contactsFilePath = 'models/contacts.json';
 
@@ -25,7 +25,6 @@ const removeContact = async (contactId) => {
 const addContact = async (body) => {
   const { name, email, phone } = body;
 
-  // Validation using Joi
   const schema = Joi.object({
     name: Joi.string().required(),
     email: Joi.string().email().required(),
@@ -48,7 +47,6 @@ const addContact = async (body) => {
 const updateContact = async (contactId, body) => {
   const { name, email, phone } = body;
 
-  // Validation using Joi
   const schema = Joi.object({
     name: Joi.string(),
     email: Joi.string().email(),
@@ -76,10 +74,31 @@ const updateContact = async (contactId, body) => {
   return updatedContact;
 };
 
-export {
+module.exports = {
   listContacts,
   getContactById,
   removeContact,
   addContact,
   updateContact,
 };
+
+
+
+// const express = require('express');
+// const {
+//   indexContacts,
+//   showContacts,
+//   deleteContacts,
+//   updateContacts,
+//   createContacts,
+// } = require('../../controllers/contacts/indexContacts.js');
+
+// const router = express.Router();
+
+// router.get('/', indexContacts);
+// router.get('/:contactId', showContacts);
+// router.delete('/:contactId', deleteContacts);
+// router.put('/:contactId', updateContacts);
+// router.post('/', createContacts);
+
+// module.exports = router;

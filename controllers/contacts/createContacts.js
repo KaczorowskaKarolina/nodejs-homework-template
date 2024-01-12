@@ -1,4 +1,3 @@
-// controllers/contacts/createContacts.js
 const { addContact } = require('../../models/contacts');
 
 async function createContacts(req, res, next) {
@@ -12,4 +11,4 @@ async function createContacts(req, res, next) {
   }
 }
 
-module.exports = createContacts;
+module.exports = { createContacts };

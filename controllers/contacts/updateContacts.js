@@ -17,4 +17,4 @@ async function updateContacts(req, res, next) {
   }
 }
 
-module.exports = updateContacts;
+module.exports = { updateContacts };
