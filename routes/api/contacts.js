@@ -8,7 +8,7 @@ const {
   deleteContacts,
   updateContacts,
   createContacts
-} = require('../../controllers/contacts');
+} = require('../../controllers/contacts/index.js');
 
 router.get("/", indexContacts);
 router.get("/:contactId", showContacts);
@@ -17,5 +17,6 @@ router.put("/:contactId", updateContacts);
 router.post("/", createContacts);
 
 module.exports = router;
+
 
 
