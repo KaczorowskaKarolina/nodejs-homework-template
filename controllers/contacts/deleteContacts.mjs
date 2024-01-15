@@ -1,4 +1,4 @@
-// controllers/contacts/deleteContacts.js
+// controllers/contacts/deleteContacts.mjs
 import { removeContact } from '../../models/contacts.mjs';
 
 async function deleteContacts(req, res, next) {
@@ -13,22 +13,3 @@ async function deleteContacts(req, res, next) {
 }
 
 export { deleteContacts };
-
-
-
-
-
-// const { removeContact } = require('../../models/contacts');
-
-// async function deleteContacts(req, res, next) {
-//   const { contactId } = req.params;
-
-//   try {
-//     await removeContact(contactId);
-//     res.status(200).json({ message: 'Contact deleted' });
-//   } catch (err) {
-//     res.status(404).json({ message: 'Not found' });
-//   }
-// }
-
-// module.exports = { deleteContacts };
