@@ -4,7 +4,7 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "start": "node app.js",
+    "start": "node -r esm app.mjs",
     "start:dev": "cross-env NODE_ENV=development nodemon ./server.js",
     "lint": "eslint **/*.js",
     "lint:fix": "eslint --fix **/*.js"
@@ -12,10 +12,11 @@
   "dependencies": {
     "cors": "^2.8.5",
     "cross-env": "7.0.3",
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "joi": "^17.11.0",
     "morgan": "^1.10.0",
-    "uuid": "^9.0.1"
+    "uuid": "^3.4.0"
   },
   "devDependencies": {
     "eslint": "7.19.0",
