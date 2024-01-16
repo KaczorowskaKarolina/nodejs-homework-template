@@ -8,7 +8,8 @@ import {
   showContacts,
   deleteContacts,
   updateContacts,
-  createContacts
+  createContacts,
+  updateStatusContactController
 } from '../../controllers/contacts/index.mjs';
 
 router.get("/", indexContacts);
@@ -16,5 +17,6 @@ router.get("/:contactId", showContacts);
 router.delete("/:contactId", deleteContacts);
 router.put("/:contactId", updateContacts);
 router.post("/", createContacts);
+router.patch("/:contactId/favorite", updateStatusContactController);
 
 export default router;

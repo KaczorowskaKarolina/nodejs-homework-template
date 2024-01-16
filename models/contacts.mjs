@@ -67,11 +67,30 @@ const updateContact = async (contactId, body) => {
   }
 };
 
+const updateStatusContact = async (contactId, body) => {
+  try {
+    if (!body.favorite) {
+      throw new Error('missing field favorite');
+    }
+
+    const updatedContact = await Contact.findByIdAndUpdate(contactId, { favorite: body.favorite }, { new: true });
+
+    if (!updatedContact) {
+      throw new Error('Contact not found');
+    }
+
+    return updatedContact;
+  } catch (error) {
+    throw new Error(`Error updating contact status: ${error.message}`);
+  }
+};
+
 export {
   listContacts,
   getContactById,
   removeContact,
   addContact,
   updateContact,
+  updateStatusContact,
 };
 
