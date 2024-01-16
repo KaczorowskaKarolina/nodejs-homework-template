@@ -9,6 +9,7 @@ REST API for working with a set of contacts.
 ---
 
 Postman was used to work with the REST API.
+Created a connection to MongoDB using Mongoose.
 
 REST API supports the following routes:
 
@@ -17,6 +18,7 @@ REST API supports the following routes:
 - @POST /api/contacts
 - @DELETE /api/contacts/:id
 - @PUT /api/contacts/:id
+- @PATCH /api/contacts/:contactId/favorite
 
 For routes that accept data (POST and PUT), checking (validation) of the received data has been considered. The joi package was used for validation.
 
