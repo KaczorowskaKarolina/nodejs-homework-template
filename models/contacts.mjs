@@ -8,6 +8,17 @@ mongoose.connect('mongodb+srv://kaczorowskakarolina:5ygs2sbnXTVXdIwb@cluster0.we
   useUnifiedTopology: true,
 });
 
+const db = mongoose.connection;
+
+db.on('error', (err) => {
+  console.error(`Error connecting to MongoDB: ${err}`);
+  process.exit(1);
+});
+
+db.once('open', () => {
+  console.log('Database connection successful');
+});
+
 const contactSchema = new Schema({
   name: {
     type: String,
