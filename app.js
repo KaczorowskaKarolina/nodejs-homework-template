@@ -13,9 +13,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/contacts', contactsRouter);
+app.use('/api/users', usersRouter);
 
 app.listen(PORT, () => {
-  console.log(`Serwer działa. Używaj API na porcie: ${PORT}`);
+  console.log(`Server is running. Use the API on port: ${PORT}`);
 });
-
-app.use('/api/users', usersRouter);
