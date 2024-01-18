@@ -48,15 +48,18 @@ const contactSchema = new Schema({
 
 const Contact = mongoose.model('Contact', contactSchema);
 
-const listContacts = async () => {
+const listContacts = async (page = 1, limit = 20, filters = {}) => {
   try {
-    const contacts = await Contact.find();
+    const skip = (page - 1) * limit;
+    const contacts = await Contact.find(filters).skip(skip).limit(limit);
     return contacts;
   } catch (error) {
     console.error(`Error listing contacts: ${error.message}`);
     throw new Error('Error listing contacts');
   }
 };
+
+
 
 const getContactById = async (contactId) => {
   try {

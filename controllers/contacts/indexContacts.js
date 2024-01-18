@@ -20,7 +20,15 @@ const authenticateUser = async (req, res, next) => {
 
 async function indexContacts(req, res, next) {
   try {
-    const contacts = await listContacts();
+    const { page = 1, limit = 20, favorite } = req.query;
+    const filters = {};
+
+    if (favorite !== undefined) {
+      filters.favorite = favorite;
+    }
+
+    const contacts = await listContacts(page, limit, filters);
+
     res.status(200).json({
       contacts,
     });
@@ -28,6 +36,8 @@ async function indexContacts(req, res, next) {
     res.status(500).json(`An error occurred: ${err}`);
   }
 }
+
+
 
 async function createContacts(req, res, next) {
   const { body } = req;
