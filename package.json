@@ -9,6 +9,13 @@
     "lint": "eslint **/*.js",
     "lint:fix": "eslint --fix **/*.js"
   },
+
+  "imports": {
+  "#controllers/*": "./controllers/*",
+  "#models/*": "./models/*",
+  "#routes/*": "./routes/*"
+  },
+
   "dependencies": {
     "cross-env": "7.0.3",
     "dotenv": "^16.3.1",

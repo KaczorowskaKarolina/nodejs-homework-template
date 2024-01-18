@@ -1,5 +1,4 @@
 // routes/api/contacts.js
-
 import express from 'express';
 const router = express.Router();
 
@@ -10,7 +9,7 @@ import {
   updateContacts,
   createContacts,
   updateStatusContactController
-} from '../../controllers/contacts/index.js';
+} from '#controllers/contacts/index.js';
 
 router.get("/", indexContacts);
 router.get("/:contactId", showContacts);

@@ -1,6 +1,5 @@
 // controllers/contacts/indexContacts.js
-
-import { listContacts, addContact } from '../../models/contacts.js';
+import { listContacts, addContact } from '#models/contacts.js';
 
 async function indexContacts(req, res, next) {
   try {

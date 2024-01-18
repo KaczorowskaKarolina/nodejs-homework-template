@@ -1,5 +1,5 @@
 // controllers/contacts/updateStatusContact.js
-import { updateStatusContact } from '../../models/contacts.js';
+import { updateStatusContact } from '#models/contacts.js';
 
 async function updateStatusContactController(req, res) {
   const { contactId } = req.params;

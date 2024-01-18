@@ -1,5 +1,5 @@
 // controllers/contacts/createContacts.js
-import { addContact } from '../../models/contacts.js';
+import { addContact } from '#models/contacts.js';
 
 async function createContacts(req, res, next) {
   const { body } = req;
