@@ -1,10 +1,15 @@
-// models/contacts.mjs
+// models/contacts.js
 
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 const { Schema } = mongoose;
 
-mongoose.connect('mongodb+srv://kaczorowskakarolina:5ygs2sbnXTVXdIwb@cluster0.wesoj4z.mongodb.net/', {
-   useNewUrlParser: true,
+dotenv.config();
+
+const { DB_CONNECTION_STRING } = process.env;
+
+mongoose.connect(DB_CONNECTION_STRING, {
+  useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
@@ -40,9 +45,11 @@ const Contact = mongoose.model('Contact', contactSchema);
 
 const listContacts = async () => {
   try {
-    return await Contact.find();
+    const contacts = await Contact.find();
+    return contacts;
   } catch (error) {
-    throw new Error(`Error listing contacts: ${error.message}`);
+    console.error(`Error listing contacts: ${error.message}`);
+    throw new Error('Error listing contacts');
   }
 };
 
