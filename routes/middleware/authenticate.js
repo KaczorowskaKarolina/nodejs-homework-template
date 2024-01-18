@@ -4,7 +4,8 @@ import User from '#models/users.js';
 
 const authenticateUser = async (req, res, next) => {
   try {
-    const token = req.header('Authorization').replace('Bearer ', '');
+    const token = req.header('Authorization')?.replace('Bearer ', '');
+
     if (!token) {
       throw new Error();
     }
