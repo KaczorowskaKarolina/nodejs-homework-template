@@ -33,7 +33,6 @@ async function createContacts(req, res, next) {
   const { body } = req;
 
   try {
-    // Add owner to the body before creating a new contact
     body.owner = req.user._id;
 
     const newContact = await addContact(body);

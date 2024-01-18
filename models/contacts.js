@@ -10,7 +10,9 @@ const { DB_CONNECTION_STRING } = process.env;
 mongoose.connect(DB_CONNECTION_STRING, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  ssl: false,
 });
+
 
 const db = mongoose.connection;
 
@@ -40,7 +42,7 @@ const contactSchema = new Schema({
   },
   owner: {
     type: Schema.Types.ObjectId,
-    ref: 'User', // Refers to the User model
+    ref: 'User',
   },
 });
 

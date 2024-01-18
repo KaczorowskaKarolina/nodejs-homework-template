@@ -26,7 +26,6 @@ const userSchema = new Schema({
   },
 });
 
-// Hash the plain text password before saving
 userSchema.pre('save', async function (next) {
   const user = this;
   if (user.isModified('password')) {
@@ -35,7 +34,6 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-// Generate authentication token
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
   const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET);
