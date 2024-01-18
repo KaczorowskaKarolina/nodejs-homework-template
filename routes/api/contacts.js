@@ -1,5 +1,7 @@
 // routes/api/contacts.js
 import express from 'express';
+import authMiddleware from '../middleware/authMiddleware.js';  // Zmiana ścieżki
+
 import { indexContacts, createContacts } from '#controllers/contacts/indexContacts.js';
 import {
   showContacts,
@@ -8,11 +10,9 @@ import {
   updateStatusContactController
 } from '#controllers/contacts/index.js';
 
-import { authenticateUser } from '#controllers/contacts/indexContacts.js';
-
 const router = express.Router();
 
-router.use(authenticateUser);
+router.use(authMiddleware);
 
 router.get("/", indexContacts);
 router.get("/:contactId", showContacts);
