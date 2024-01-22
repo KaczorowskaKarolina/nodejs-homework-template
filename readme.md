@@ -22,6 +22,7 @@ REST API supports the following routes:
 - @GET /api/contacts?page=1&limit=20 for pagination.
 - @GET /api/contacts?favorite=true for filtering by favorite contacts.
 - @PATCH /api/users/update-subscription to update the user's subscription.
+- @PATCH /api/users/avatars
 
 For routes that accept data (POST and PUT), checking (validation) of the received data has been considered. The joi package was used for validation.
 
@@ -52,7 +53,8 @@ Strategy used: Single Action Controller.
 
 ---
 
-![Project structure](./ProjectStructure.jpg)
+![Project structure](./ProjectStructure1.jpg)
+![Project structure](./ProjectStructure2.jpg)
 
 ## Author
 
