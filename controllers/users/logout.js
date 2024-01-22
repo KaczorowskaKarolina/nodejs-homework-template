@@ -11,9 +11,9 @@ async function logout(req, res) {
     user.token = null;
     await user.save();
 
-    res.status(204).end();
+    return res.status(204).end();
   } catch (err) {
-    res.status(500).json({ message: `An error occurred: ${err.message}` });
+    return res.status(500).json({ message: `An error occurred: ${err.message}` });
   }
 }
 

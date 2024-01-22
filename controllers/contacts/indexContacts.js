@@ -14,7 +14,7 @@ const authenticateUser = async (req, res, next) => {
     req.token = token;
     next();
   } catch (error) {
-    res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 };
 
@@ -29,15 +29,13 @@ async function indexContacts(req, res, next) {
 
     const contacts = await listContacts(page, limit, filters);
 
-    res.status(200).json({
+    return res.status(200).json({
       contacts,
     });
   } catch (err) {
-    res.status(500).json(`An error occurred: ${err}`);
+    return res.status(500).json(`An error occurred: ${err}`);
   }
 }
-
-
 
 async function createContacts(req, res, next) {
   const { body } = req;
@@ -46,9 +44,9 @@ async function createContacts(req, res, next) {
     body.owner = req.user._id;
 
     const newContact = await addContact(body);
-    res.status(201).json(newContact);
+    return res.status(201).json(newContact);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    return res.status(400).json({ message: err.message });
   }
 }
 

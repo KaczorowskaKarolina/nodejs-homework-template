@@ -15,10 +15,9 @@ const authenticateUser = async (req, res, next) => {
     req.token = token;
     next();
   } catch (error) {
-    res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 };
-
 
 async function updateStatusContactController(req, res) {
   const { contactId } = req.params;
@@ -26,18 +25,17 @@ async function updateStatusContactController(req, res) {
 
   try {
     if (!body.hasOwnProperty('favorite')) {
-      res.status(400).json({ message: 'missing field favorite' });
-      return;
+      return res.status(400).json({ message: 'missing field favorite' });
     }
 
     const updatedContact = await updateStatusContact(contactId, body);
 
-    res.status(200).json(updatedContact);
+    return res.status(200).json(updatedContact);
   } catch (err) {
     if (err.message === 'Contact not found') {
-      res.status(404).json({ message: 'Not found' });
+      return res.status(404).json({ message: 'Not found' });
     } else {
-      res.status(400).json({ message: err.message });
+      return res.status(400).json({ message: err.message });
     }
   }
 }

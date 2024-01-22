@@ -30,14 +30,14 @@ async function signup(req, res) {
 
     await newUser.save();
 
-    res.status(201).json({
+    return res.status(201).json({
       user: {
         email: newUser.email,
         subscription: newUser.subscription,
       },
     });
   } catch (err) {
-    res.status(500).json({ message: `An error occurred: ${err.message}` });
+    return res.status(500).json({ message: `An error occurred: ${err.message}` });
   }
 }
 

@@ -1,6 +1,6 @@
 // routes/api/contacts.js
 import express from 'express';
-import authMiddleware from '../middleware/authMiddleware.js';  // Zmiana ścieżki
+import authMiddleware from '../middleware/authMiddleware.js';
 
 import { indexContacts, createContacts } from '#controllers/contacts/indexContacts.js';
 import {

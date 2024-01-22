@@ -1,5 +1,4 @@
 // controllers/users/updateSubscription.js
-
 import User from '#models/users.js';
 
 async function updateSubscription(req, res) {
@@ -14,7 +13,7 @@ async function updateSubscription(req, res) {
     user.subscription = subscription;
     await user.save();
 
-    res.status(200).json({
+    return res.status(200).json({
       message: 'Subscription updated successfully',
       user: {
         email: user.email,
@@ -22,7 +21,7 @@ async function updateSubscription(req, res) {
       },
     });
   } catch (err) {
-    res.status(500).json({ message: `An error occurred: ${err.message}` });
+    return res.status(500).json({ message: `An error occurred: ${err.message}` });
   }
 }
 

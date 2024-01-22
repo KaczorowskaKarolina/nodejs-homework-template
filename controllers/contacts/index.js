@@ -20,7 +20,7 @@ const authenticateUser = async (req, res, next) => {
     req.token = token;
     next();
   } catch (error) {
-    res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 };
 

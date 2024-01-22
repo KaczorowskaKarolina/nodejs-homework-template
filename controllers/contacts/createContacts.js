@@ -14,7 +14,7 @@ const authenticateUser = async (req, res, next) => {
     req.token = token;
     next();
   } catch (error) {
-    res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 };
 
@@ -23,9 +23,9 @@ async function createContacts(req, res, next) {
 
   try {
     const newContact = await addContact(body);
-    res.status(201).json(newContact);
+    return res.status(201).json(newContact);
   } catch (err) {
-    res.status(400).json({ message: err.message });
+    return res.status(400).json({ message: err.message });
   }
 }
 

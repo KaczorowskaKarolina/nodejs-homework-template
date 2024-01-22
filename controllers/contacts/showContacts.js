@@ -15,23 +15,23 @@ const authenticateUser = async (req, res, next) => {
     req.token = token;
     next();
   } catch (error) {
-    res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 };
 
 async function showContacts(req, res, next) {
   const { contactId } = req.params;
-  
+
   try {
     const contact = await getContactById(contactId);
-    
+
     if (contact) {
-      res.status(200).json(contact);
+      return res.status(200).json(contact);
     } else {
-      res.status(404).json({ message: 'Not found' });
+      return res.status(404).json({ message: 'Not found' });
     }
   } catch (err) {
-    res.status(500).json(`An error occurred: ${err}`);
+    return res.status(500).json(`An error occurred: ${err}`);
   }
 }
 

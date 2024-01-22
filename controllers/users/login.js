@@ -27,7 +27,7 @@ async function login(req, res) {
 
     const token = await user.generateAuthToken();
 
-    res.status(200).json({
+    return res.status(200).json({
       token,
       user: {
         email: user.email,
@@ -35,7 +35,7 @@ async function login(req, res) {
       },
     });
   } catch (err) {
-    res.status(500).json({ message: `An error occurred: ${err.message}` });
+    return res.status(500).json({ message: `An error occurred: ${err.message}` });
   }
 }
 

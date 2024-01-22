@@ -14,7 +14,7 @@ const authenticateUser = async (req, res, next) => {
     req.token = token;
     next();
   } catch (error) {
-    res.status(401).json({ message: 'Unauthorized' });
+    return res.status(401).json({ message: 'Unauthorized' });
   }
 };
 
@@ -23,9 +23,9 @@ async function deleteContacts(req, res, next) {
 
   try {
     await removeContact(contactId);
-    res.status(200).json({ message: 'Contact deleted' });
+    return res.status(200).json({ message: 'Contact deleted' });
   } catch (err) {
-    res.status(404).json({ message: 'Not found' });
+    return res.status(404).json({ message: 'Not found' });
   }
 }
 
