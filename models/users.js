@@ -2,7 +2,7 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import gravatar from 'gravatar'; // Dodaj nowy import
+import gravatar from 'gravatar'; 
 
 const { Schema } = mongoose;
 
@@ -37,9 +37,8 @@ userSchema.pre('save', async function (next) {
     user.password = await bcrypt.hash(user.password, 8);
   }
 
-  // Dodaj generowanie URL-a avatara przy użyciu gravatar
   if (!user.avatarURL) {
-    const avatarURL = gravatar.url(user.email, { s: '200', r: 'pg', d: 'mm' }); // Konfiguracja avatara
+    const avatarURL = gravatar.url(user.email, { s: '200', r: 'pg', d: 'mm' });
     user.avatarURL = avatarURL;
   }
 

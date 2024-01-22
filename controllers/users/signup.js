@@ -41,18 +41,15 @@ async function signup(req, res) {
   }
 }
 
-// Dodanie obsługi awataru
 async function uploadAvatar(req, res) {
   try {
     const { user } = req;
     if (!user) {
       return res.status(401).json({ message: 'Not authorized' });
     }
-
-    // Pobranie informacji o awatarze z żądania
+a
     const avatarInfo = req.file;
 
-    // Aktualizacja informacji o awatarze w obiekcie użytkownika
     user.avatar = `/avatars/${avatarInfo.filename}`;
     await user.save();
 
