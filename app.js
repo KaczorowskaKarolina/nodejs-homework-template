@@ -11,10 +11,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Konfiguracja Multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'public/avatars'); // Określenie folderu docelowego dla awatarów
+    cb(null, 'tmp'); // Folder docelowy dla załadowanych plików
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname)); // Unikalna nazwa pliku
@@ -26,13 +25,12 @@ const upload = multer({ storage: storage });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Rozdawanie plików statycznych
 const currentModuleFile = new URL(import.meta.url).pathname;
 const currentModuleDir = path.dirname(currentModuleFile);
 app.use('/avatars', express.static(path.join(currentModuleDir, 'public', 'avatars')));
 
-// Dodanie middleware Multer do ładowania awatarów
-app.post('/api/users/upload-avatar', upload.single('avatar'), (req, res) => {
+// Endpoint do aktualizacji awatara
+app.patch('/api/users/avatars', upload.single('avatar'), (req, res) => {
   res.status(200).json({ message: 'Avatar uploaded successfully' });
 });
 
