@@ -25,7 +25,7 @@ async function signup(req, res) {
     const newUser = new User({
       email: req.body.email,
       password: hashedPassword,
-      subscription: 'starter', 
+      subscription: 'starter',
     });
 
     await newUser.save();
@@ -41,4 +41,32 @@ async function signup(req, res) {
   }
 }
 
-export { signup };
+// Dodanie obsługi awataru
+async function uploadAvatar(req, res) {
+  try {
+    const { user } = req;
+    if (!user) {
+      return res.status(401).json({ message: 'Not authorized' });
+    }
+
+    // Pobranie informacji o awatarze z żądania
+    const avatarInfo = req.file;
+
+    // Aktualizacja informacji o awatarze w obiekcie użytkownika
+    user.avatar = `/avatars/${avatarInfo.filename}`;
+    await user.save();
+
+    return res.status(200).json({
+      message: 'Avatar uploaded successfully',
+      user: {
+        email: user.email,
+        subscription: user.subscription,
+        avatar: user.avatar,
+      },
+    });
+  } catch (err) {
+    return res.status(500).json({ message: `An error occurred: ${err.message}` });
+  }
+}
+
+export { signup, uploadAvatar };
