@@ -1,8 +1,10 @@
 // models/users.js
+
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import gravatar from 'gravatar'; 
+import gravatar from 'gravatar';
+import crypto from 'crypto'; 
 
 const { Schema } = mongoose;
 
@@ -29,6 +31,14 @@ const userSchema = new Schema({
     type: String,
     default: null,
   },
+  verify: {
+    type: Boolean,
+    default: false,
+  },
+  verificationToken: {
+    type: String,
+    required: [true, 'Verify token is required'],
+  },
 });
 
 userSchema.pre('save', async function (next) {
@@ -40,6 +50,11 @@ userSchema.pre('save', async function (next) {
   if (!user.avatarURL) {
     const avatarURL = gravatar.url(user.email, { s: '200', r: 'pg', d: 'mm' });
     user.avatarURL = avatarURL;
+  }
+
+  if (!user.verificationToken) {
+
+    user.verificationToken = crypto.randomBytes(16).toString('hex');
   }
 
   next();

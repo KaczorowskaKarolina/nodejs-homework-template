@@ -9,6 +9,7 @@ import { currentUser } from '#controllers/users/currentUser.js';
 import { updateSubscription } from '#controllers/users/updateSubscription.js';
 import { uploadAvatar } from '#controllers/users/signup.js';
 import { updateAvatar } from '#controllers/users/updateAvatar.js';
+import { verifyUser } from '#controllers/users/users.js';
 
 const router = express.Router();
 
@@ -21,5 +22,7 @@ router.get('/current', currentUser);
 router.patch('/update-subscription', updateSubscription);
 router.post('/upload-avatar', uploadAvatar);
 router.patch('/avatars', updateAvatar);
+router.post('/signup', signup);
+router.get('/verify/:verificationToken', verifyUser);
 
 export default router;
