@@ -3,8 +3,8 @@
 import Joi from 'joi';
 import User from '#models/users.js';
 import bcrypt from 'bcrypt';
-import sgMail from '@sendgrid/mail'; 
-import crypto from 'crypto'; 
+import sgMail from '@sendgrid/mail';
+import crypto from 'crypto';
 
 const signupSchema = Joi.object({
   email: Joi.string().email().required(),
@@ -27,15 +27,18 @@ async function signup(req, res) {
 
     const hashedPassword = await bcrypt.hash(password, 8);
 
+    const verificationToken = crypto.randomBytes(16).toString('hex');
+
     const newUser = new User({
       email,
       password: hashedPassword,
       subscription: 'starter',
+      verificationToken,
     });
 
     await newUser.save();
 
-    const verificationLink = `${process.env.BASE_URL}/api/users/verify/${newUser.verificationToken}`;
+    const verificationLink = `${process.env.BASE_URL}/api/users/verify/${verificationToken}`;
     const msg = {
       to: newUser.email,
       from: 'kaczorowska.karolina@gmail.com',
